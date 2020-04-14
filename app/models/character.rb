@@ -1,4 +1,5 @@
-class Character < ActiveRecord::Base
+
+class Character < ApplicationRecord
     has_many :character_klasses
     has_many :character_spells
     has_many :klasses, through: :character_klasses
@@ -252,6 +253,5 @@ class Character < ActiveRecord::Base
     def random_spell_picker(spell_level)
         self.klasses.first.spells.select { |spell| spell.level == spell_level}.sample
     end
-
 
 end

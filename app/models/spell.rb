@@ -1,4 +1,5 @@
-class Spell < ActiveRecord::Base
+
+class Spell < ApplicationRecord
     has_many :klass_spells
     has_many :character_spells
     has_many :klasses, through: :klass_spells

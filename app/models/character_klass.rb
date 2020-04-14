@@ -1,4 +1,5 @@
-class CharacterKlass < ActiveRecord::Base
+
+class CharacterKlass < ApplicationRecord
 
     belongs_to :character
     belongs_to :klass
@@ -14,5 +15,4 @@ class CharacterKlass < ActiveRecord::Base
     #         @spells_known[i] = {"level #{i} spells" => []}
     #     }
 
-    
 end
