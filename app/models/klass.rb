@@ -1,4 +1,3 @@
-
 class Klass < ApplicationRecord
     has_many :character_klasses
     has_many :klass_spells
