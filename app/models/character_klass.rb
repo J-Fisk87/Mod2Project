@@ -1,4 +1,4 @@
-class CharacterKlass < ActiveRecord::Base
+class CharacterKlass < ApplicationRecord
 
     belongs_to :character
     belongs_to :klass
