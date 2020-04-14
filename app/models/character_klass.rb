@@ -14,5 +14,4 @@ class CharacterKlass < ApplicationRecord
     #         @spells_known[i] = {"level #{i} spells" => []}
     #     }
 
-    
 end

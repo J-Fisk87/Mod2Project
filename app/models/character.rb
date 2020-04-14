@@ -253,5 +253,4 @@ class Character < ApplicationRecord
         self.klasses.first.spells.select { |spell| spell.level == spell_level}.sample
     end
 
-
 end
