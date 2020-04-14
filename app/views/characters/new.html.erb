@@ -1,0 +1,17 @@
+<%= form_with model: @character do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %><br>
+
+    Klass: 
+    <ul>
+        <%= f.fields_for :klasses do |klasses_form| %>
+            <li>
+                <%= klasses_form.label :name %>
+                <%= klasses_form.select :name, Klass.all.collect { |klass| klass.name} %>
+
+                <%= klasses_form.label :level%>
+                <%= klasses_form.text_field :level %>
+            </li>
+        <% end %>
+    <%= f.submit %>
+<% end %>

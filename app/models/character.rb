@@ -3,9 +3,15 @@ class Character < ApplicationRecord
     has_many :character_spells
     has_many :klasses, through: :character_klasses
     has_many :spells, through: :character_spells
+    accepts_nested_attributes_for :klasses
 
-    def choose_klass(klass_name)
+
+    def choose_klass(klass_name, lvl)
+        self.klasses << 
+
+
         self.klasses << Klass.all.find { |klass| klass.name.downcase == klass_name.downcase }
+        self.klasses.last.level = lvl
     end
 
     def randomize_spells
