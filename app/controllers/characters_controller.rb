@@ -18,6 +18,9 @@ class CharactersController < ApplicationController
         @character.choose_klass(params[:character][:klass], params[:character][:lvl])
         binding.pry
 
+        # Change level to charklasses
+        # Need Strong Params
+        # Cocoon for forms
 
         if @character.save
             redirect_to character_path(@character)
@@ -41,4 +44,8 @@ class CharactersController < ApplicationController
     def delete
         
     end
+
+    def character_params
+        params.require(:character).permit(:name, klass_attributes: [:id, :name, :done, :_destroy], character_klass_attributes: [:id, :level, :done, :_destroy])
+      end
 end

@@ -1,0 +1,20 @@
+<%= form_with model: @character do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %><br>
+
+    Class: 
+     <div id='klasses'>
+       <%= f.fields_for :klasses do |klass| %>
+         <%= render 'klass_fields', :f => klass %>
+       <% end %>
+       <br>
+
+       <div class='links'>
+         <%= link_to_add_association 'add klass', f, :klasses, partial: 'klass_fields' %>
+       </div>
+     </div>
+     <br>
+
+     <%= f.submit %>
+
+<% end %>
