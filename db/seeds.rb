@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Klass.new(name: "None").save
 
 klasses = JSON.parse(RestClient.get("http://www.dnd5eapi.co/api/classes/").body) 
 klasses['results'].each { |klass|

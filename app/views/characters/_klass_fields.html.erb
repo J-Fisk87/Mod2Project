@@ -1,0 +1,9 @@
+<div class='nested-fields'>
+    <%= f.label :klass %>
+    <%= f.text_field :name, class: "form-input form-control" %>
+    <%= f.fields_for :items_attributes do |character_klass_attributes| %>
+        
+      <%= render 'character_klass_attribute_fields', :f => character_klass_attributes %>
+    <% end %>
+    <br>
+</div>
