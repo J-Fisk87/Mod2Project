@@ -3,29 +3,56 @@ class Character < ApplicationRecord
     has_many :character_spells
     has_many :klasses, through: :character_klasses
     has_many :spells, through: :character_spells
-    accepts_nested_attributes_for :klasses
-    accepts_nested_attributes_for :character_klasses
+    accepts_nested_attributes_for :klasses, reject_if: :all_blank
 
 
-    def choose_klass(klass_name, lvl)
-    
-        # self.klasses << Klass.all.find { |klass| klass.name.downcase == klass_name.downcase }
-        # self.klasses.last.level = lvl
+    def klasses_attributes=(klasses_attributes)
+        #iterate 
+        # character.find klasses_attributes.values[0][:id]
+        # iterate again to get level
+
+        klasses_attributes.values.each do |attr|
+            binding.pry
+
+            klass = Klass.find(attr[:id])
+            self.klasses << klass
+            
+            self.klasses.last.character_klasses.last.level = attr[:character_klass_attributes][:level]
+
+            self.save
+
+
+            
+        end
+
+
     end
 
+
+
+    # def choose_klass(klass_name, lvl)
+    #     # self.klasses << Klass.all.find { |klass| klass.name.downcase == klass_name.downcase }
+    #     # self.klasses.last.level = lvl
+    # end
+
     def randomize_spells
-        case self.klasses.first.name.downcase
-        when 'wizard'
-            self.level.times do |i| wizard_spells_randomizer(i + 1) end
-        when 'warlock'
-            self.level.times do |i| warlock_spells_randomizer(i + 1) end
-        when 'bard'
-            self.level.times do |i| bard_spells_randomizer(i + 1) end
-        when 'ranger'
-            self.level.times do |i| ranger_spells_randomizer(i + 1) end
-        when 'sorcerer'
-            self.level.times do |i| sorcerer_spells_randomizer(i + 1) end
-        else "Error: #{self.name} is not a known Spellcaster"
+        self.character_klasses.each do |klass|
+            klass_name = Klass.find { |find_klass| find_klass.klass_id }
+            
+        
+            case klass.name
+                when 'wizard'
+                    self.level.times do |i| wizard_spells_randomizer(i + 1) end
+                when 'warlock'
+                    self.level.times do |i| warlock_spells_randomizer(i + 1) end
+                when 'bard'
+                    self.level.times do |i| bard_spells_randomizer(i + 1) end
+                when 'ranger'
+                    self.level.times do |i| ranger_spells_randomizer(i + 1) end
+                when 'sorcerer'
+                    self.level.times do |i| sorcerer_spells_randomizer(i + 1) end
+                else "Error: #{self.name} is not a known Spellcaster"
+            end
         end
     end
 

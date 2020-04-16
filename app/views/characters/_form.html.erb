@@ -1,16 +1,15 @@
-<%= form_with model: @character do |f| %>
+<%= form_for @character do |f| %>
     <%= f.label :name %>
     <%= f.text_field :name %><br>
 
     Class: 
      <div id='klasses'>
 
-        <%= f.fields_for :character_klasses do |character_klass_attributes| %>
+        <%= f.fields_for :klasses do |klass| %>
             <label> Class: </label>
-            <%= character_klass_attributes.collection_select :klass_id, Klass.all, :id, :name %>
-
-            <%= character_klass_attributes.label :level %>
-            <%= character_klass_attributes.text_field :level, class: "form-input form-control" %>
+            <%= render "klass_fields", :f => klass %>
+            
+            
             <br>
        <% end %>
     <br>
