@@ -14,7 +14,6 @@ class CharactersController < ApplicationController
     end
 
     def create
-        
         @character = Character.new(character_params)
 
         # @character.name = params[:character][:name]
