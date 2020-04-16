@@ -7,36 +7,26 @@ class Character < ApplicationRecord
 
 
     def klasses_attributes=(klasses_attributes)
-        #iterate 
-        # character.find klasses_attributes.values[0][:id]
-        # iterate again to get level
-
         klasses_attributes.values.each do |attr|
-            binding.pry
+            if attr[:id] != ""
 
-            klass = Klass.find(attr[:id])
-            self.klasses << klass
-            
-            self.klasses.last.character_klasses.last.level = attr[:character_klass_attributes][:level]
+                klass = Klass.find(attr[:id])
+                self.klasses << klass
 
-            self.save
+                self.character_klasses.last.character = self
 
-
+                self.character_klasses.last.level = attr[:character_klass_attributes][:level].to_i
+                self.save
+                                
+            end
             
         end
 
-
     end
-
-
-
-    # def choose_klass(klass_name, lvl)
-    #     # self.klasses << Klass.all.find { |klass| klass.name.downcase == klass_name.downcase }
-    #     # self.klasses.last.level = lvl
-    # end
 
     def randomize_spells
         self.character_klasses.each do |klass|
+            binding.pry
             klass_name = Klass.find { |find_klass| find_klass.klass_id }
             
         
