@@ -262,6 +262,9 @@ class Character < ApplicationRecord
         while count < amount
             spell = random_spell_picker(spell_level)
             if self.spells.none? do |item| item == spell end
+                if spell == nil
+                    binding.pry
+                end
                 self.spells << spell
                 count += 1
             end
