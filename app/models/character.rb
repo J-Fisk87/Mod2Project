@@ -22,10 +22,20 @@ class Character < ApplicationRecord
 
     end
 
+    def randomize_new_spells
+        self.character_klasses.each do |klass|
+            klass_name = Klass.find(klass[:klass_id]).name
+        end
+
+    end
+
     def randomize_spells
+        self.spells.destroy_all
         self.character_klasses.each do |klass|
             klass_level = klass.level
-            klass_name = Klass.find(klass[:klass_id]).name
+            @current_klass = Klass.find(klass[:klass_id])
+            klass_name = @current_klass.name
+            
         
             case klass_name
                 when 'wizard'
@@ -272,7 +282,7 @@ class Character < ApplicationRecord
     end
 
     def random_spell_picker(spell_level)
-        self.klasses.first.spells.select { |spell| spell.level == spell_level}.sample
+        @current_klass.spells.select { |spell| spell.level == spell_level}.sample
     end
 
 end
