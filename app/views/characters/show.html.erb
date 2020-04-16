@@ -1,0 +1,16 @@
+<h1><%= @character.name %></h1>
+<br>
+<br> 
+<% spells = @character.spells.sort_by { |spell| spell.level }%>
+<% current_level = 0%>
+Spell Level 0: Cantrips
+<% spells.each do |spell|%>
+    <% if spell.level > current_level %>
+      <% current_level += 1%>
+      Spell Level <%="#{current_level}"%>: 
+      
+      <br>
+    <% end %>
+    <p><a href="/spells/<%= spell.id %>"> <%= spell.name %></a></p>
+
+<% end %>

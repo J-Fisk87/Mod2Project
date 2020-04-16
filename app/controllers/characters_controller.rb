@@ -37,6 +37,7 @@ class CharactersController < ApplicationController
         
 
         if @character.save
+            @character.randomize_spells
             redirect_to character_path(@character)
         else
             render :new
