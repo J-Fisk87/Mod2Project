@@ -9,38 +9,35 @@ class Character < ApplicationRecord
     def klasses_attributes=(klasses_attributes)
         klasses_attributes.values.each do |attr|
             if attr[:id] != ""
-
                 klass = Klass.find(attr[:id])
                 self.klasses << klass
 
                 self.character_klasses.last.character = self
 
                 self.character_klasses.last.level = attr[:character_klass_attributes][:level].to_i
-                self.save
                                 
             end
-            
         end
+        self.save
 
     end
 
     def randomize_spells
         self.character_klasses.each do |klass|
-            binding.pry
-            klass_name = Klass.find { |find_klass| find_klass.klass_id }
-            
+            klass_level = klass.level
+            klass_name = Klass.find(klass[:klass_id]).name
         
-            case klass.name
+            case klass_name
                 when 'wizard'
-                    self.level.times do |i| wizard_spells_randomizer(i + 1) end
+                    klass.level.times do |i| wizard_spells_randomizer(i + 1) end
                 when 'warlock'
-                    self.level.times do |i| warlock_spells_randomizer(i + 1) end
+                    klass.level.times do |i| warlock_spells_randomizer(i + 1) end
                 when 'bard'
-                    self.level.times do |i| bard_spells_randomizer(i + 1) end
+                    klass.level.times do |i| bard_spells_randomizer(i + 1) end
                 when 'ranger'
-                    self.level.times do |i| ranger_spells_randomizer(i + 1) end
+                    klass.level.times do |i| ranger_spells_randomizer(i + 1) end
                 when 'sorcerer'
-                    self.level.times do |i| sorcerer_spells_randomizer(i + 1) end
+                    klass.level.times do |i| sorcerer_spells_randomizer(i + 1) end
                 else "Error: #{self.name} is not a known Spellcaster"
             end
         end
