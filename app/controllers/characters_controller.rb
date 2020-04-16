@@ -52,8 +52,13 @@ class CharactersController < ApplicationController
     def update
         @character = Character.find(params[:id])
 
-        @character.update(params.require(:character).permit(:name))
-        redirect_to character_path(@character)
+        @character.update(character_params)
+        if @character.save
+            @character.randomize_spells
+            redirect_to character_path(@character)
+        else
+            render :new
+        end
     end
 
     def delete
