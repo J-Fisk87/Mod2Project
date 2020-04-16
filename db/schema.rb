@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 6) do
 
   create_table "klasses", force: :cascade do |t|
     t.string "name"
+    t.integer "level"
   end
 
   create_table "spells", force: :cascade do |t|
