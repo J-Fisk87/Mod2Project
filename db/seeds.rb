@@ -32,30 +32,3 @@ spells["results"].length.times { |i|
         }
     end
  }
-
-test_character1 = Character.new(name: "lvl5bard")
-test_character1.klasses << Klass.find_by(name: "bard")
-test_character1.klasses.last.character_klasses.last.level = 5
-
-test_character2 = Character.new(name: "lvl10wizard_lvl3monk")
-test_character2.klasses << Klass.find_by(name: "wizard")
-test_character2.klasses.last.character_klasses.last.level = 10
-test_character2.klasses << Klass.find_by(name: "monk")
-test_character2.klasses.last.character_klasses.last.level = 3
-
-test_character3 = Character.new(name: "lvl5sorcerer_lvl2ranger")
-test_character3.klasses << Klass.find_by(name: "sorcerer")
-test_character3.klasses.last.character_klasses.last.level = 5
-test_character3.klasses << Klass.find_by(name: "ranger")
-test_character3.klasses.last.character_klasses.last.level = 2
-
-test_character4 = Character.new(name: "nonknownspellcaster")
-test_character4.klasses << Klass.find_by(name: "druid")
-test_character4.klasses.last.character_klasses.last.level = 4
-test_character4.klasses << Klass.find_buy(name: "fighter")
-test_character4.klasses.last.character_klasses.last.level = 8
-
-
-
-
-
