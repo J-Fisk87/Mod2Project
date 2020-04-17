@@ -44,7 +44,7 @@ class CharactersController < ApplicationController
 
     def destroy
         Character.find(params[:id]).destroy
-        redirect_to '/characters/new'
+        redirect_to '/characters/'
     end
 
     private
