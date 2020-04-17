@@ -1,13 +1,17 @@
 <h1><%= @character.name %></h1>
-<br>
+<% @character.character_klasses.each do |char_klass| %>
+    <h2>Level <%= char_klass.level%> <%= Klass.find(char_klass.klass_id.to_i).name.capitalize %> </h2>
+<% end %>
 <br> 
+<%= button_to "delete", @character, :method => "delete" %>
+<br>
 <% spells = @character.spells.sort_by { |spell| spell.level }%>
 <% current_level = 0%>
-Spell Level 0: Cantrips
+<u><b> Spell Level 0: Cantrips </b></u>
 <% spells.each do |spell|%>
     <% if spell.level > current_level %>
       <% current_level += 1%>
-      Spell Level <%="#{current_level}"%>: 
+      <u><b> Spell Level <%="#{current_level}"%>: </b></u>
       
       <br>
     <% end %>
