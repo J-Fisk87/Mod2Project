@@ -1,5 +1,5 @@
 <h1><%= @character.name %></h1>
-<%= link_to "delete", @character, method: :delete, data: { confirm: "You sure?" } %>
+<%= button_to "delete", @character, :method => "delete" %>
 <br>
 <br> 
 <% spells = @character.spells.sort_by { |spell| spell.level }%>
