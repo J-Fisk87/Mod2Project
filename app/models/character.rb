@@ -8,24 +8,30 @@ class Character < ApplicationRecord
 
     def klasses_attributes=(klasses_attributes)
         klasses_attributes.values.each do |attr|
-            if attr[:id] != ""
+            if attr[:id] != "" && attr[:character_klass_attributes][:level] != ""
+
                 klass = Klass.find(attr[:id])
-                self.klasses << klass
+                self.klasses << klass unless self.klasses.include?(klass)
 
-                self.character_klasses.last.character = self
 
-                self.character_klasses.last.level = attr[:character_klass_attributes][:level].to_i
+                if self.character_klasses.any? { |k| k.character_id == self.id && k.klass_id == attr[:id].to_i }
+
+                    k = self.character_klasses.select { |i|  i.character_id == self.id && i.klass_id == attr[:id].to_i }.first
+
+                    k.level = attr[:character_klass_attributes][:level].to_i
+                    k.save
+                else
+                    k = self.character_klasses.select { |i| i.klass_id == attr[:id].to_i}.first
+                    k.level = attr[:character_klass_attributes][:level].to_i
+                    k.save
+                end
+
                                 
             end
+
+
         end
         self.save
-
-    end
-
-    def randomize_new_spells
-        self.character_klasses.each do |klass|
-            klass_name = Klass.find(klass[:klass_id]).name
-        end
 
     end
 
@@ -36,7 +42,6 @@ class Character < ApplicationRecord
             @current_klass = Klass.find(klass[:klass_id])
             klass_name = @current_klass.name
             
-        
             case klass_name
                 when 'wizard'
                     klass.level.times do |i| wizard_spells_randomizer(i + 1) end
@@ -269,6 +274,7 @@ class Character < ApplicationRecord
 
     def choose_spells(spell_level, amount)
         count = 0
+        breakout = 0
         while count < amount
             spell = random_spell_picker(spell_level)
             if self.spells.none? do |item| item == spell end
@@ -278,7 +284,12 @@ class Character < ApplicationRecord
                 self.spells << spell
                 count += 1
             end
+            breakout += 1
+            if breakout > 20
+                break
+            end
         end
+ 
     end
 
     def random_spell_picker(spell_level)

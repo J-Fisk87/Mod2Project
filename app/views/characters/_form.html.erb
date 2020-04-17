@@ -4,12 +4,9 @@
 
     Class: 
      <div id='klasses'>
-
         <%= f.fields_for :klasses do |klass| %>
             <label> Class: </label>
-            <%= render "klass_fields", :f => klass %>
-            
-            
+            <%= render "klass_fields", :f => klass, collection: @character_klasses %>         
             <br>
        <% end %>
     <br>

@@ -2,7 +2,7 @@ class CharacterKlass < ApplicationRecord
 
     belongs_to :character
     belongs_to :klass
-    
+
 
     # attr_accessor :class_name, :level, :spell_list, :spells_known, :spell_list_by_level
     # def initialize(class_name, level)
