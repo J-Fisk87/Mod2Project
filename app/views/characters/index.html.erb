@@ -1,0 +1,7 @@
+<% @characters.each do |character| %>
+    <li><a><%= character.name %> 
+    <% character.character_klasses.each do |klass| %>
+        <h2>Level <%= char_klass.level%> <%= Klass.find(char_klass.klass_id.to_i).name.capitalize %> </h2>
+    <%end%>
+    </li>
+<%end%>
