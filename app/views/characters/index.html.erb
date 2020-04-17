@@ -1,7 +1,6 @@
 <% @characters.each do |character| %>
-    <li><a><%= character.name %> 
+    <h1><a href="/characters/<%= character.id %>"><%= character.name %> </a></h1>
     <% character.character_klasses.each do |klass| %>
-        <h2>Level <%= char_klass.level%> <%= Klass.find(char_klass.klass_id.to_i).name.capitalize %> </h2>
+        <h2>Level <%= klass.level%> <%= Klass.find(klass.klass_id.to_i).name.capitalize %> </h2>
     <%end%>
-    </li>
 <%end%>
